@@ -14,7 +14,7 @@ export const TypingArea = ({
   charStates 
 }: TypingAreaProps) => {
   return (
-    <div className="bg-[#2d2415] rounded-3xl p-8 sm:p-12 mb-6 shadow-2xl border border-orange-900/20">
+    <div className="rounded-3xl p-8 sm:p-12 mb-6 shadow-2xl border" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--color-accent)' + '33' }}>
       <div className="text-2xl sm:text-3xl leading-relaxed flex flex-wrap gap-3 font-mono select-none">
         {words.slice(0, 50).map((word, wordIndex) => (
           <span
@@ -29,20 +29,28 @@ export const TypingArea = ({
           >
             {word.split('').map((char, charIndex) => {
               const state = charStates[wordIndex]?.[charIndex] || 'pending';
+              let charStyle = {};
+              let charClass = 'transition-colors duration-100 ';
+              
+              if (wordIndex === currentWordIndex && charIndex === currentInput.length) {
+                charClass += 'border-l-2 animate-pulse ';
+                charStyle = { borderColor: 'var(--color-accent)' };
+              }
+              
+              if (state === 'correct') {
+                charStyle = { ...charStyle, color: 'var(--color-correct)' };
+              } else if (state === 'incorrect') {
+                charStyle = { ...charStyle, color: 'var(--color-incorrect)' };
+                charClass += 'rounded px-0.5 ';
+              } else {
+                charStyle = { ...charStyle, color: 'var(--text-secondary)' };
+              }
+              
               return (
                 <span
                   key={charIndex}
-                  className={`transition-colors duration-100 ${
-                    wordIndex === currentWordIndex && charIndex === currentInput.length
-                      ? 'border-l-2 border-orange-500 animate-pulse'
-                      : ''
-                  } ${
-                    state === 'correct'
-                      ? 'text-orange-400'
-                      : state === 'incorrect'
-                      ? 'text-red-400 bg-red-400/10 rounded px-0.5'
-                      : 'text-gray-500'
-                  }`}
+                  className={charClass}
+                  style={charStyle}
                 >
                   {char}
                 </span>

@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+:root {
+  --bg-primary: #1e1810;
+  --text-primary: #d1d5db;
+  --text-secondary: #9ca3af;
+  --color-correct: #10b981;
+  --color-incorrect: #ef4444;
+  --color-accent: #f59e0b;
+  --bg-card: #2d2416;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -10,4 +20,49 @@ body {
   font-family: 'JetBrains Mono', 'Roboto Mono', 'Courier New', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes sakuraFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes matrixFall {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes navyScan {
+  0%, 100% {
+    transform: translateY(-100%) scaleY(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(100%) scaleY(1);
+    opacity: 0.4;
+  }
 }

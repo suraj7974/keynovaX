@@ -25,6 +25,10 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
   }, [duration]);
 
   useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
     if (isTestActive && timeLeft > 0) {
       const timer = setInterval(() => {
         setTimeLeft((prev) => {
@@ -126,6 +130,19 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
     setCharStates(newCharStates);
   };
 
+  const handleClick = () => {
+    inputRef.current?.focus();
+  };
+
+  useEffect(() => {
+    const handleWindowClick = () => {
+      inputRef.current?.focus();
+    };
+    
+    window.addEventListener('click', handleWindowClick);
+    return () => window.removeEventListener('click', handleWindowClick);
+  }, []);
+
   const handleSpace = () => {
     if (currentWordIndex < words.length - 1) {
       setCurrentWordIndex((prev) => prev + 1);
@@ -135,6 +152,9 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
 
   const handleChangeDuration = (newDuration: TestDuration) => {
     setDuration(newDuration);
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
   };
 
   return (
@@ -143,7 +163,8 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full max-w-5xl"
+      className="w-full max-w-5xl relative z-10"
+      onClick={handleClick}
     >
       <Header 
         duration={duration} 
@@ -175,7 +196,8 @@ export const TypingTest = ({ onComplete }: TypingTestProps) => {
 
       {!isTestActive && (
         <motion.p
-          className="text-center text-gray-500 text-sm"
+          className="text-center text-sm"
+          style={{ color: 'var(--text-secondary)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >

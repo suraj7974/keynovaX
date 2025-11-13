@@ -5,15 +5,16 @@ interface TimerProps {
 }
 
 export const Timer = ({ timeLeft }: TimerProps) => {
-  const getTimerColor = () => {
-    if (timeLeft <= 5) return 'text-red-500';
-    if (timeLeft <= 10) return 'text-orange-400';
-    return 'text-orange-500';
+  const getTimerStyle = () => {
+    if (timeLeft <= 5) return { color: 'var(--color-incorrect)' };
+    if (timeLeft <= 10) return { color: 'var(--color-accent)' };
+    return { color: 'var(--color-accent)' };
   };
 
   return (
     <motion.div
-      className={`text-6xl font-bold text-center mb-12 ${getTimerColor()} transition-colors duration-300`}
+      className="text-6xl font-bold text-center mb-12 transition-colors duration-300"
+      style={getTimerStyle()}
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ 
         scale: timeLeft <= 5 ? [1, 1.05, 1] : 1, 

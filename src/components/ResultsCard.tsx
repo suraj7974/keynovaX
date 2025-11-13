@@ -13,62 +13,67 @@ export const ResultsCard = ({ stats, onReset }: ResultsCardProps) => {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
-      className="w-full max-w-3xl"
+      className="w-full max-w-3xl relative z-10"
     >
-      <div className="bg-[#2d2415] rounded-3xl p-10 sm:p-14 shadow-2xl border border-orange-900/20">
-        <h2 className="text-4xl font-bold text-center mb-10 text-orange-500">
+      <div className="rounded-3xl p-10 sm:p-14 shadow-2xl border" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--color-accent)' + '33' }}>
+        <h2 className="text-4xl font-bold text-center mb-10" style={{ color: 'var(--color-accent)' }}>
           Test Results
         </h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
           <motion.div
-            className="bg-[#1e1810] rounded-2xl p-8 text-center border border-orange-900/30 hover:border-orange-700/50 transition-all"
+            className="rounded-2xl p-8 text-center border transition-all"
+            style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--color-accent)' + '4D' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <div className="text-6xl font-bold text-orange-500 mb-3">
+            <div className="text-6xl font-bold mb-3" style={{ color: 'var(--color-accent)' }}>
               {stats?.wpm || 0}
             </div>
-            <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">Words Per Minute</div>
+            <div className="text-sm font-medium uppercase tracking-wider" style={{ color: 'var(--text-secondary)' }}>Words Per Minute</div>
           </motion.div>
 
           <motion.div
-            className="bg-[#1e1810] rounded-2xl p-8 text-center border border-emerald-900/30 hover:border-emerald-700/50 transition-all"
+            className="rounded-2xl p-8 text-center border transition-all"
+            style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--color-correct)' + '4D' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <div className="text-6xl font-bold text-emerald-400 mb-3">
+            <div className="text-6xl font-bold mb-3" style={{ color: 'var(--color-correct)' }}>
               {stats?.accuracy || 0}%
             </div>
-            <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">Accuracy</div>
+            <div className="text-sm font-medium uppercase tracking-wider" style={{ color: 'var(--text-secondary)' }}>Accuracy</div>
           </motion.div>
 
           <motion.div
-            className="bg-[#1e1810] rounded-2xl p-6 text-center border border-emerald-900/20"
+            className="rounded-2xl p-6 text-center border"
+            style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--color-correct)' + '33' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <div className="text-4xl font-bold text-emerald-400 mb-2">{stats?.correctChars || 0}</div>
-            <div className="text-gray-500 text-xs font-medium uppercase tracking-wider">Correct</div>
+            <div className="text-4xl font-bold mb-2" style={{ color: 'var(--color-correct)' }}>{stats?.correctChars || 0}</div>
+            <div className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-secondary)' }}>Correct</div>
           </motion.div>
 
           <motion.div
-            className="bg-[#1e1810] rounded-2xl p-6 text-center border border-red-900/20"
+            className="rounded-2xl p-6 text-center border"
+            style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--color-incorrect)' + '33' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <div className="text-4xl font-bold text-red-400 mb-2">{stats?.incorrectChars || 0}</div>
-            <div className="text-gray-500 text-xs font-medium uppercase tracking-wider">Incorrect</div>
+            <div className="text-4xl font-bold mb-2" style={{ color: 'var(--color-incorrect)' }}>{stats?.incorrectChars || 0}</div>
+            <div className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-secondary)' }}>Incorrect</div>
           </motion.div>
         </div>
 
         <motion.button
           onClick={onReset}
-          className="w-full bg-orange-500 text-gray-900 font-semibold py-4 rounded-xl hover:bg-orange-400 transition-all shadow-lg hover:shadow-orange-500/50 transform hover:scale-[1.02]"
+          className="w-full font-semibold py-4 rounded-xl transition-all shadow-lg transform"
+          style={{ backgroundColor: 'var(--color-accent)', color: 'var(--bg-primary)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
